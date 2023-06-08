@@ -94,8 +94,9 @@ const Home = () => {
         scale: {
           duration: 0.1,
           type: "spring",
-          mass: 2,
-          stiffness: 400,
+          mass: 10,
+          stiffness: 1300,
+          damping: 35,
         },
         delay: i / 10,
       },
@@ -104,11 +105,28 @@ const Home = () => {
     setTimeout(() => {
       bouncingControlls.stop();
       opacityControlls.stop();
-    }, 8000);
+    }, 10000);
   }, []);
+  const nameHoverVariants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.25,
+      rotate: 10,
+      transition: {
+        duration: 0.5,
+        mass: 0.7,
+        stiffness: 1000,
+        type: "spring",
+        bounce: 10,
+      },
+    },
+  };
   return (
     <div className="page home-page">
       <div className="home-textarea">
+        <br />
         <span className="home-hello">
           {hello_text.map((t, i) => (
             <motion.span animate={opacityControlls} custom={i}>
@@ -124,6 +142,9 @@ const Home = () => {
                 display: t != " " ? "inline-block" : "inline",
                 width: "fit-content",
               }}
+              variants={nameHoverVariants}
+              initial="hidden"
+              whileHover="hover"
               animate={bouncingControlls}
               custom={i + hello_text.length}
             >
@@ -149,6 +170,9 @@ const Home = () => {
                   display: t != " " ? "inline-block" : "inline",
                   width: "fit-content",
                 }}
+                variants={nameHoverVariants}
+                initial="hidden"
+                whileHover="hover"
                 animate={bouncingControlls}
                 custom={
                   i +

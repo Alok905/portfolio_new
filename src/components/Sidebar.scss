@@ -30,11 +30,31 @@
     width: 100%;
     gap: 1.8rem;
     list-style: none;
-
-    a {
-      font-size: 2.3rem;
-      color: #69696a;
+    li {
+      width: 100%;
+      display: flex;
       text-align: center;
+      margin-top: 0.5rem;
+      a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 2.3rem;
+        color: #69696a;
+        i {
+          display: block;
+          width: 100%;
+        }
+        span {
+          display: block;
+          position: absolute;
+          color: #ffd700;
+          font-size: 1rem;
+          font-weight: 600;
+        }
+      }
     }
   }
   .social-links {
@@ -84,11 +104,12 @@
       width: 100%;
       gap: 1rem;
       list-style: none;
-
-      a {
-        font-size: 2.3rem;
-        color: #69696a;
-        text-align: center;
+      li {
+        a {
+          font-size: 2.3rem;
+          color: #69696a;
+          text-align: center;
+        }
       }
     }
     .social-links {
@@ -111,8 +132,13 @@
   .nav-bar {
     width: 4.2rem;
     .nav-links {
-      a {
-        font-size: 2rem;
+      li {
+        a {
+          font-size: 2rem;
+          span {
+            font-size: 0.8rem;
+          }
+        }
       }
     }
   }

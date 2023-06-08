@@ -5,21 +5,60 @@ import "./Sidebar.scss";
 import LogoFilled from "../Assets/svg/LogoFilled";
 
 const Sidebar = () => {
-  const iconVariants = {
+  const navLinkIconVariantss = {
     hover: {
       color: "#ffd700",
       scale: 1.25,
       transition: {
         duration: 0.5,
-        mass: 1,
-        stiffness: 1000,
-        type: "spring",
-        bounce: 3,
       },
     },
   };
   const navIconBounceControl = useAnimationControls();
   const socialIconBounceControl = useAnimationControls();
+
+  const [navLinkAnimation, setnavLinkAnimation] =
+    useState(navIconBounceControl);
+
+  const navLinkIconVariants = {
+    rest: {
+      x: 0,
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeIn",
+      },
+    },
+    hover: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeOut",
+      },
+    },
+  };
+  const navLinkTextVariants = {
+    rest: {
+      opacity: 0,
+      scale: 0,
+      ease: "easeOut",
+      duration: 0.2,
+      type: "tween",
+    },
+    hover: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        type: "spring",
+        // ease: "easeIn",
+        mass: 0.5,
+        stiffness: 100,
+        bounce: 3,
+      },
+    },
+  };
   useEffect(() => {
     navIconBounceControl.set({ y: "-100vh", opacity: 0 });
     navIconBounceControl.start((i) => ({
@@ -39,56 +78,73 @@ const Sidebar = () => {
       opacity: 1,
       y: 0,
       transition: {
+        duration: 1,
         type: "tween",
         delay: i / 10,
       },
     }));
+
+    setTimeout(() => {
+      navIconBounceControl.stop();
+      socialIconBounceControl.stop();
+
+      setnavLinkAnimation("rest");
+    }, 6000);
   }, []);
+
+  const nav_links_array = [
+    { icon: "fa-house", custom: 8, text: "HOME", link: "/" },
+    { icon: "fa-user", custom: 6, text: "ABOUT", link: "/about" },
+    { icon: "fa-diagram-project", custom: 4, text: "WORK", link: "/work" },
+    { icon: "fa-envelope", custom: 2, text: "CONTACT", link: "/contact" },
+  ];
+  const social_links_array = [
+    { icon: "fa-github", custom: 1, link: "#" },
+    { icon: "fa-linkedin", custom: 2, link: "#" },
+    { icon: "fa-instagram", custom: 3, link: "#" },
+    { icon: "", custom: 4, link: "#" },
+    { icon: "", custom: 5, link: "#" },
+    { icon: "", custom: 6, link: "#" },
+    { icon: "", custom: 7, link: "#" },
+  ];
   return (
     <div className="nav-bar">
       <div className="logo-container">
         <LogoFilled />
       </div>
       <ul className="nav-links">
-        <motion.li custom={8} animate={navIconBounceControl}>
-          <Link to="/">
-            <motion.i
-              variants={iconVariants}
-              whileHover="hover"
-              className="fa fa-solid fa-house"
-            ></motion.i>
-          </Link>
-        </motion.li>
-        <motion.li custom={6} animate={navIconBounceControl}>
-          <Link to="/about">
-            <motion.i
-              variants={iconVariants}
-              whileHover="hover"
-              className="fa fa-solid fa-user"
-            ></motion.i>
-          </Link>
-        </motion.li>
-        <motion.li custom={4} animate={navIconBounceControl}>
-          <Link to="/work">
-            <motion.i
-              variants={iconVariants}
-              whileHover="hover"
-              className="fa fa-solid fa-diagram-project"
-            ></motion.i>
-          </Link>
-        </motion.li>
-        <motion.li custom={2} animate={navIconBounceControl}>
-          <Link to="/contact">
-            <motion.i
-              variants={iconVariants}
-              whileHover="hover"
-              className="fa fa-solid fa-envelope"
-            ></motion.i>
-          </Link>
-        </motion.li>
+        {nav_links_array.map(({ icon, custom, text, link }) => (
+          <motion.li
+            initial="rest"
+            whileHover="hover"
+            animate="rest"
+            custom={custom}
+            animate={navLinkAnimation}
+          >
+            <Link to={link}>
+              <motion.span variants={navLinkTextVariants}>{text}</motion.span>
+              <motion.i
+                variants={navLinkIconVariants}
+                className={`fa fa-solid ${icon}`}
+              ></motion.i>
+            </Link>
+          </motion.li>
+        ))}
       </ul>
       <ul className="social-links">
-        <motion.li custom={1} animate={socialIconBounceControl}>
+        {social_links_array.map(({ custom, icon, link }, i) => (
+          <motion.li custom={1} animate={socialIconBounceControl}>
+            {i <= 2 && (
+              <motion.a
+                whileHover={{ rotate: 20, color: "#ffd700" }}
+                href={link}
+              >
+                <i className={`fa fa-brands ${icon}`}></i>
+              </motion.a>
+            )}
+          </motion.li>
+        ))}
+        {/* <motion.li custom={1} animate={socialIconBounceControl}>
           <motion.a whileHover={{ rotate: 20, color: "#ffd700" }} href="">
             <i className="fa fa-brands fa-github"></i>
           </motion.a>
@@ -106,7 +162,7 @@ const Sidebar = () => {
         <motion.li custom={4} animate={socialIconBounceControl}></motion.li>
         <motion.li custom={5} animate={socialIconBounceControl}></motion.li>
         <motion.li custom={6} animate={socialIconBounceControl}></motion.li>
-        <motion.li custom={7} animate={socialIconBounceControl}></motion.li>
+        <motion.li custom={7} animate={socialIconBounceControl}></motion.li> */}
       </ul>
     </div>
   );
