@@ -1,0 +1,308 @@
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .home-textarea {
+    width: 55%;
+    padding: 0 6rem;
+    color: #fff;
+    font-weight: 700;
+    .home-hello {
+      font-size: 3.2rem;
+    }
+    .home-name {
+      color: #ffd700;
+      line-height: 1.1;
+      font-size: 5.6rem;
+    }
+    .home-skill {
+      font-size: 3.2rem;
+      .home-domain {
+        font-size: 4rem;
+        line-height: 1.3;
+        color: rgb(0, 255, 234);
+      }
+    }
+    .home-intro {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-top: 3rem;
+      font-weight: 400;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.6rem 3rem;
+      border-radius: 3rem;
+      margin-top: 4rem;
+      background: rgb(0, 255, 234);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #022c43;
+    }
+  }
+  .logo-home-container {
+    // background-color: #ffffff99;
+
+    width: 50%;
+    margin-right: 5rem;
+    height: 100%;
+    transform: rotate(-90deg);
+    position: relative;
+    .logo-page-svg {
+      height: 100%;
+      width: 70%;
+      position: absolute;
+    }
+    .logo-outlined-svg {
+      position: absolute;
+    }
+    .width-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 30rem;
+      width: 100%;
+      background-color: #022c43ad;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      z-index: 1 !important;
+    }
+    #profile-img {
+      height: 30rem;
+      width: 30rem;
+      border-radius: 20%;
+      background-color: #00032d65;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        object-position: center;
+        height: 70rem;
+        margin-bottom: 1rem;
+        margin-right: 7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1330px) {
+  .home-page {
+    .home-textarea {
+      padding: 0 3rem;
+      .home-hello {
+        font-size: 2.2rem;
+      }
+      .home-name {
+        line-height: 1.1;
+        font-size: 3.6rem;
+      }
+      .home-skill {
+        font-size: 2.2rem;
+        .home-domain {
+          font-size: 3.4rem;
+        }
+      }
+      .home-intro {
+        font-size: 1.15rem;
+        margin-top: 2rem;
+      }
+      button {
+        padding: 1.3rem 2.5rem;
+        margin-top: 2.8rem;
+        font-size: 2rem;
+      }
+    }
+    .logo-home-container {
+      margin-right: 1rem;
+      .width-line {
+        height: 22rem;
+        width: 100%;
+      }
+      #profile-img {
+        height: 22rem;
+        width: 22rem;
+        img {
+          height: 52rem;
+          margin-bottom: 1rem;
+          margin-right: 5rem;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1005px) {
+  .home-page {
+    flex-direction: column-reverse;
+    .home-textarea {
+      width: 100%;
+      height: 40%;
+      padding: 0 3rem;
+      .home-hello {
+        font-size: 3rem;
+      }
+      .home-name {
+        line-height: 1.1;
+        font-size: 4.4rem;
+      }
+      .home-skill {
+        font-size: 3rem;
+        .home-domain {
+          font-size: 3.54rem;
+        }
+      }
+      .home-intro {
+        font-size: 1.7rem;
+        margin-top: 2rem;
+      }
+      button {
+        border-radius: 5rem;
+        padding: 2rem 4rem;
+        margin-top: 2rem;
+        font-size: 2.6rem;
+      }
+    }
+    .logo-home-container {
+      height: 60%;
+      width: 100%;
+      .width-line {
+        height: 23rem;
+      }
+      #profile-img {
+        height: 23rem;
+        width: 23rem;
+        img {
+          height: 54rem;
+          margin-bottom: 1rem;
+          margin-right: 5.5rem;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 740px) {
+  .home-page {
+    .home-textarea {
+      height: 47%;
+      padding: 0 2.7rem;
+      .home-hello {
+        font-size: 2rem;
+      }
+      .home-name {
+        font-size: 3.4rem;
+      }
+      .home-skill {
+        font-size: 2rem;
+        .home-domain {
+          font-size: 3rem;
+        }
+      }
+      .home-intro {
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+      button {
+        font-weight: 800;
+        padding: 1.2rem 2rem;
+        margin-top: 1.2rem;
+        font-size: 1.3rem;
+      }
+    }
+    .logo-home-container {
+      width: 100%;
+      height: 53%;
+      .width-line {
+        width: 100%;
+        height: 15rem;
+      }
+      #profile-img {
+        height: 15rem;
+        width: 15rem;
+        img {
+          height: 36rem;
+          margin-bottom: 0.8rem;
+          margin-right: 3.3rem;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 495px) {
+  .home-page {
+    .home-textarea {
+      height: 47%;
+      padding: 0 1.5rem;
+      .home-hello {
+        font-size: 1.6rem;
+      }
+      .home-name {
+        font-size: 3rem;
+      }
+      .home-skill {
+        font-size: 1.6rem;
+        .home-domain {
+          font-size: 2.6rem;
+        }
+      }
+      .home-intro {
+        font-size: 0.8rem;
+        margin-top: 1.2rem;
+      }
+      button {
+        font-weight: 800;
+        padding: 1.2rem 2rem;
+        margin-top: 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 430px) {
+  .home-page {
+    .home-textarea {
+      .home-hello {
+        font-size: 1.3rem;
+      }
+      .home-name {
+        font-size: 2.9rem;
+      }
+      .home-skill {
+        font-size: 1.3rem;
+        .home-domain {
+          font-size: 2rem;
+        }
+      }
+      .home-intro {
+        font-size: 0.9rem;
+        line-height: 1.08;
+        margin-top: 1.2rem;
+      }
+      button {
+        font-weight: 800;
+        padding: 1.2rem 2rem;
+        margin-top: 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
+    .logo-home-container {
+      width: 90%;
+      height: 45%;
+      .width-line {
+        height: 10rem;
+      }
+      #profile-img {
+        height: 10rem;
+        width: 10rem;
+        img {
+          height: 23rem;
+          margin-bottom: 0.5rem;
+          margin-right: 2.5rem;
+        }
+      }
+    }
+  }
+}
