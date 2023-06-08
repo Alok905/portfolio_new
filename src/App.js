@@ -2,16 +2,10 @@ import styled from "styled-components";
 import "./app.scss";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Work from "./components/Work";
-
-const AppContainer = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-`;
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Work from "./pages/Work";
+import Contact from "./pages/Contact";
 
 function App() {
   return (

@@ -1,4 +1,7 @@
 .nav-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
   z-index: 9999;
   width: 5.8rem;
   height: 100vh;
@@ -128,9 +131,9 @@
     }
   }
 }
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 350px) {
   .nav-bar {
-    width: 4.2rem;
+    width: 4.7rem;
     .nav-links {
       li {
         a {

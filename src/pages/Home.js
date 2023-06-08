@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import LogoPage from "../Assets/svg/LogoPage";
-import LogoOutlined from "../Assets/svg/LogoOutlined";
 import "./Home.scss";
 import { motion, useAnimationControls } from "framer-motion";
-import profileImage from "../Assets/svg/alok_profile_image_final_svg.svg";
+import profileImage from "../Assets/svg/alok_home.svg";
+import LogoHome from "../Assets/svg/LogoHome";
+import LogoOutlinedHome from "../Assets/svg/LogoOutlinedHome";
 
 const Home = () => {
   const hello_text = ["H", "e", "l", "l", "o", " ", "I", "t", `'`, "s"];
@@ -71,6 +71,11 @@ const Home = () => {
 
   const opacityControlls = useAnimationControls();
   const bouncingControlls = useAnimationControls();
+  const profileImageControlls = useAnimationControls();
+
+  const [profileImageAnimation, setProfileImageAnimation] = useState(
+    profileImageControlls
+  );
 
   useEffect(() => {
     opacityControlls.set({ opacity: 0, scale: 0.4 });
@@ -102,20 +107,63 @@ const Home = () => {
       },
     }));
 
+    profileImageControlls.set({ scale: 0, opacity: 0, x: "-35rem" });
+    profileImageControlls.start({
+      scale: 1,
+      opacity: 1,
+      x: "-10rem",
+      transition: {
+        scale: {
+          type: "tween",
+          duration: 1,
+          ease: "easeIn",
+        },
+        x: {
+          type: "tween",
+          duration: 1,
+          ease: "easeIn",
+        },
+      },
+    });
+
     setTimeout(() => {
       bouncingControlls.stop();
       opacityControlls.stop();
     }, 10000);
+
+    setTimeout(() => {
+      setProfileImageAnimation("visible");
+    }, 2000);
   }, []);
   const nameHoverVariants = {
     hidden: {
       scale: 1,
+      color: "#ffd700",
     },
     hover: {
       scale: 1.25,
       rotate: 10,
+      color: "rgb(0, 255, 234)",
       transition: {
-        duration: 0.5,
+        duration: 0.1,
+        mass: 0.7,
+        stiffness: 1000,
+        type: "spring",
+        bounce: 10,
+      },
+    },
+  };
+  const domainHoverVariants = {
+    hidden: {
+      scale: 1,
+      color: "rgb(0, 255, 234)",
+    },
+    hover: {
+      scale: 1.25,
+      rotate: 10,
+      color: "#ffd700",
+      transition: {
+        duration: 0.1,
         mass: 0.7,
         stiffness: 1000,
         type: "spring",
@@ -148,6 +196,10 @@ const Home = () => {
               animate={bouncingControlls}
               custom={i + hello_text.length}
             >
+              {name_text[i + 1] === "J" &&
+                ((window.innerWidth <= 950 && window.innerWidth >= 750) ||
+                  window.innerWidth <= 410) && <br />}
+              {name_text[i + 1] === "R" && window.innerWidth <= 303 && <br />}
               {t}
             </motion.span>
           ))}
@@ -170,7 +222,7 @@ const Home = () => {
                   display: t != " " ? "inline-block" : "inline",
                   width: "fit-content",
                 }}
-                variants={nameHoverVariants}
+                variants={domainHoverVariants}
                 initial="hidden"
                 whileHover="hover"
                 animate={bouncingControlls}
@@ -181,18 +233,17 @@ const Home = () => {
                   skill_text_first.length
                 }
               >
+                {skill_text_second[i + 1] === "W" &&
+                  ((window.innerWidth <= 950 && window.innerWidth >= 750) ||
+                    window.innerWidth <= 410) && <br />}
+                {skill_text_second[i + 1] === "D" &&
+                  window.innerWidth <= 327 && <br />}
                 {t}
               </motion.span>
             ))}
           </span>
         </span>
         <br />
-        <p className="home-intro">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores
-          doloremque obcaecati quasi dolorum eos unde animi corrup Lorem ipsum
-          dolor sit amet consectetur, adipisicing elit. Dolores doloremque
-          obcaecati quasi dolorum eos unde animi corrup
-        </p>
         <motion.button
           initial={{ boxShadow: "none" }}
           whileHover={{ boxShadow: "0 0 1.8rem rgb(0,255,234)" }}
@@ -209,17 +260,17 @@ const Home = () => {
         transition={{
           type: "linear",
           repeat: Infinity,
-          duration: 2,
+          duration: 4,
           ease: "easeInOut",
         }}
       >
-        <LogoPage />
-        <LogoOutlined />
+        <LogoHome />
+        <LogoOutlinedHome />
         <div className="width-line">
           <motion.div
             variants={profileImageVariants}
             initial="hidden"
-            animate="visible"
+            animate={profileImageAnimation}
             id="profile-img"
           >
             <img src={profileImage} alt="" style={{ rotate: "90deg" }} />

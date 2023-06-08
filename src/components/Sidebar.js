@@ -144,25 +144,6 @@ const Sidebar = () => {
             )}
           </motion.li>
         ))}
-        {/* <motion.li custom={1} animate={socialIconBounceControl}>
-          <motion.a whileHover={{ rotate: 20, color: "#ffd700" }} href="">
-            <i className="fa fa-brands fa-github"></i>
-          </motion.a>
-        </motion.li>
-        <motion.li custom={2} animate={socialIconBounceControl}>
-          <motion.a whileHover={{ rotate: 20, color: "#ffd700" }} href="">
-            <i className="fa fa-brands fa-linkedin"></i>
-          </motion.a>
-        </motion.li>
-        <motion.li custom={3} animate={socialIconBounceControl}>
-          <motion.a whileHover={{ rotate: 20, color: "#ffd700" }} href="">
-            <i className="fa fa-brands fa-instagram"></i>
-          </motion.a>
-        </motion.li>
-        <motion.li custom={4} animate={socialIconBounceControl}></motion.li>
-        <motion.li custom={5} animate={socialIconBounceControl}></motion.li>
-        <motion.li custom={6} animate={socialIconBounceControl}></motion.li>
-        <motion.li custom={7} animate={socialIconBounceControl}></motion.li> */}
       </ul>
     </div>
   );
