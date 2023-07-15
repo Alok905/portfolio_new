@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import { motion, useAnimationControls } from "framer-motion";
-import profileImage from "../Assets/svg/alok_home.svg";
-import LogoHome from "../Assets/svg/LogoHome";
-import LogoOutlinedHome from "../Assets/svg/LogoOutlinedHome";
 
-const Home = () => {
+const Home = ({setCursorScale}) => {
   const hello_text = ["H", "e", "l", "l", "o", " ", "I", "t", `'`, "s"];
   const name_text = [
     "A",
@@ -52,31 +49,9 @@ const Home = () => {
     "e",
     "r",
   ];
-  const profileImageVariants = {
-    hidden: {
-      rotate: 90,
-      y: "-50%",
-    },
-    visible: {
-      x: ["-10rem", "-9rem", "-10rem"],
-      y: "-50%",
-      rotate: 90,
-      transition: {
-        duration: 4,
-        ease: "linear",
-        repeat: Infinity,
-      },
-    },
-  };
 
   const opacityControlls = useAnimationControls();
   const bouncingControlls = useAnimationControls();
-  const profileImageControlls = useAnimationControls();
-
-  const [profileImageAnimation, setProfileImageAnimation] = useState(
-    profileImageControlls
-  );
-
   useEffect(() => {
     opacityControlls.set({ opacity: 0, scale: 0.4 });
     opacityControlls.start((i) => ({
@@ -107,33 +82,12 @@ const Home = () => {
       },
     }));
 
-    profileImageControlls.set({ scale: 0, opacity: 0, x: "-35rem" });
-    profileImageControlls.start({
-      scale: 1,
-      opacity: 1,
-      x: "-10rem",
-      transition: {
-        scale: {
-          type: "tween",
-          duration: 1,
-          ease: "easeIn",
-        },
-        x: {
-          type: "tween",
-          duration: 1,
-          ease: "easeIn",
-        },
-      },
-    });
-
     setTimeout(() => {
       bouncingControlls.stop();
       opacityControlls.stop();
     }, 10000);
 
-    setTimeout(() => {
-      setProfileImageAnimation("visible");
-    }, 2000);
+    // return window.removeEventListener("mousemove", mouseMove);
   }, []);
   const nameHoverVariants = {
     hidden: {
@@ -171,6 +125,7 @@ const Home = () => {
       },
     },
   };
+
   return (
     <div className="page home-page">
       <div className="home-textarea">
@@ -195,6 +150,10 @@ const Home = () => {
               whileHover="hover"
               animate={bouncingControlls}
               custom={i + hello_text.length}
+              onMouseEnter={() => setCursorScale(2)}
+              onMouseLeave={() => setCursorScale(1)}
+              // onHoverStart={() => setCursorScale(1.7)}
+              // onHoverEnd={() => setCursorScale(1)}
             >
               {name_text[i + 1] === "J" &&
                 ((window.innerWidth <= 950 && window.innerWidth >= 750) ||
@@ -232,6 +191,10 @@ const Home = () => {
                   name_text.length +
                   skill_text_first.length
                 }
+                // onHoverStart={mouseEnter}
+                // onHoverEnd={mouseLeave}
+                onMouseEnter={() => setCursorScale(2)}
+                onMouseLeave={() => setCursorScale(1)}
               >
                 {skill_text_second[i + 1] === "W" &&
                   ((window.innerWidth <= 950 && window.innerWidth >= 750) ||
@@ -249,34 +212,14 @@ const Home = () => {
           whileHover={{ boxShadow: "0 0 1.8rem rgb(0,255,234)" }}
           transition={{ duration: 0.3, type: "spring", bounce: 0, mass: 0.1 }}
           className="home-download-cv"
+          onMouseEnter={() => setCursorScale(2)}
+          onMouseLeave={() => setCursorScale(1)}
+          // onHoverStart={mouseEnter}
+          // onHoverEnd={mouseLeave}
         >
           Download CV
         </motion.button>
       </div>
-      <motion.div
-        className="logo-home-container"
-        initial={{ scale: 0.995, rotate: -90 }}
-        animate={{ scale: [0.995, 1, 0.995] }}
-        transition={{
-          type: "linear",
-          repeat: Infinity,
-          duration: 4,
-          ease: "easeInOut",
-        }}
-      >
-        <LogoHome />
-        <LogoOutlinedHome />
-        <div className="width-line">
-          <motion.div
-            variants={profileImageVariants}
-            initial="hidden"
-            animate={profileImageAnimation}
-            id="profile-img"
-          >
-            <img src={profileImage} alt="" style={{ rotate: "90deg" }} />
-          </motion.div>
-        </div>
-      </motion.div>
     </div>
   );
 };

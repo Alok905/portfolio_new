@@ -19,7 +19,7 @@ const logoVariants = {
   },
 };
 
-const LogoFilled = () => {
+const LogoFilled = ({setCursorScale}) => {
   return (
     <motion.svg
       style={{
@@ -37,6 +37,8 @@ const LogoFilled = () => {
       height="297mm"
       version="1.1"
       viewBox="0 0 210 297"
+      onMouseEnter={() => setCursorScale(1.7)}
+      onMouseLeave={() => setCursorScale(1)}
     >
       <g>
         <path

@@ -1,191 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./About.scss";
-import { motion, useAnimationControls } from "framer-motion";
-import LogoAbout from "../Assets/svg/LogoAbout";
-import LogoOutlinedAbout from "../Assets/svg/LogoOutlinedAbout";
-import aboutProfileImage from "../Assets/svg/alok_about.svg";
+import { motion } from "framer-motion";
 
-const About = () => {
-  const profileImageVariants = {
+const About = ( )  => {
+
+  const codeEditorWrapRef = useRef()
+  const aboutArray = [
+    [{ str: "class", type: "keyword" }, { str: " AlokRanjan", type: "function" }, { str: " {", type: "op" }],
+    [{str: ". . ", type: "dot"},{ str: "// I can and I will", type: "comment" }],
+    [{str: ". . ", type: "dot"},{ str: "constructor", type: "keyword" }, { str: "() {", type: "op" }],
+    [{str: ". . . . ", type: "dot"},{ str: "this", type: "keyword2" }, { str: ".", type: "op" }, { str: "name", type: "variable" }, { str: " = ", type: "op" }, { str: `'Alok Ranjan Joshi'`, type: "string" }],
+    [{str: ". . . . ", type: "dot"},{ str: "this", type: "keyword2" }, { str: ".", type: "op" }, { str: "dateOfBirth", type: "variable" }, { str: " = ", type: "op" }, { str: `'28-march-2002'`, type: "string" }],
+    [{str: ". . . . ", type: "dot"}, { str: "this", type: "keyword2" }, { str: ".", type: "op" }, { str: "email", type: "variable" }, { str: " = ", type: "op" }, { str: `'alokranjanjoshi07567@gmail.com'`, type: "string" }],
+    [{ str: ". . ", type: "dot" }, { str: "}", type: "op" }],
+    //education
+    [{str: ". . ", type: "dot"}, { str: "education", type: "function" }, { str: "() {", type: "op" }],
+    [{str: ". . . . ", type: "dot"}, { str: "return ", type: "keyword3" }, { str: "[", type: "op" }],
+    [{str: ". . . . . . ", type: "dot"}, { str: "{ ", type: "op" }, {str: `'2015-2017'`, type: "string"}, {str: " : ", type: "op"},  {str: `'CMHS, Bangomunda'`, type: "string"},  {str: ` }`, type: "op"}, { str: ",", type: "op" }],
+    [{str: ". . . . . . ", type: "dot"}, { str: "{ ", type: "op" }, {str: `'2017-2019'`, type: "string"}, {str: " : ", type: "op"},  {str: `'Adyant Higher Secondary School, BBSR'`, type: "string"},  {str: ` }`, type: "op"}, { str: ",", type: "op" }],
+    [{str: ". . . . . . ", type: "dot"}, { str: "{ ", type: "op" }, {str: `'2019-2020'`, type: "string"}, {str: " : ", type: "op"},  {str: `'FIITJEE'`, type: "string"},  {str: ` }`, type: "op"}, { str: ",", type: "op" }],
+    [{ str: ". . . . . . ", type: "dot" }, { str: "{ ", type: "op" }, { str: `'2020-now'`, type: "string" }, { str: " : ", type: "op" }, { str: `'OUTR, BBSR'`, type: "string" }, { str: ` }`, type: "op" }, { str: ",", type: "op" }],
+    [{ str: ". . . . ", type: "dot" }, { str: "]", type: "op" }],
+    [{ str: ". . ", type: "dot" }, { str: "}", type: "op" }],
+    //skills
+    [{ str: ". . ", type: "dot" }, { str: "skills", type: "function" }, { str: "() {", type: "op" }],
+    [{ str: ". . . . ", type: "dot" }, { str: "return ", type: "keyword3" }, { str: "[ ", type: "op" }, { str: `'C', 'C++', 'Data Structures', 'HTML', 'CSS', 'Javascript', 'ReactJS', 'NodeJS', 'ExprerssJS', 'MongoDB', 'Blockchain', 'Solidity',`, type: "string" }, { str: " | ", type: "blink" }, { str: " ]", type: "op" }],
+    [{str: ". . . . ", type: "dot"},{ str: "// Still learning new skills", type: "comment" }],
+    [{ str: ". . ", type: "dot" }, { str: "}", type: "op" }],
+    [{ str: "}", type: "op" }],
+  ]
+
+  const colors = new Map([
+  ["keyword", "#5918df"],
+  ["keyword2", "#e3244c"],
+  ["keyword3", "#5918df"],
+  ["string", "#24e33a"],
+  ["function", "#eeff31"],
+  ["variable", "#24e394"],
+  ["comment", "#78707e"],
+  ["op", "#fff"],
+  ["dot", "#3b355399"],
+]);
+
+  const blinkVariants = {
     hidden: {
-      rotate: 90,
-      y: "-50%",
-    },
-    visible: {
-      x: ["-10rem", "-9rem", "-10rem"],
-      y: "-50%",
-      rotate: 90,
-      transition: {
-        duration: 4,
-        ease: "linear",
-        repeat: Infinity,
-      },
-    },
-  };
-
-  const opacityControlls = useAnimationControls();
-  const bouncingControlls = useAnimationControls();
-  const profileImageControlls = useAnimationControls();
-
-  const [profileImageAnimation, setProfileImageAnimation] = useState(
-    profileImageControlls
-  );
-
-  useEffect(() => {
-    opacityControlls.set({ opacity: 0, scale: 0.4 });
-    opacityControlls.start((i) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.1,
-        delay: i / 10,
-        scale: {
-          type: "spring",
-          bounce: 1,
-        },
-      },
-    }));
-    bouncingControlls.set({ scale: 0.1, opacity: 0 });
-    bouncingControlls.start((i) => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        scale: {
-          duration: 0.1,
-          type: "spring",
-          mass: 10,
-          stiffness: 1300,
-          damping: 35,
-        },
-        delay: i / 10,
-      },
-    }));
-
-    profileImageControlls.set({ opacity: 0, x: "-10rem" });
-    profileImageControlls.start({
-      opacity: 1,
-      x: "-10rem",
-      transition: {
-        type: "tween",
-        duration: 3,
-        ease: "easeIn",
-      },
-    });
-
-    setTimeout(() => {
-      bouncingControlls.stop();
-      opacityControlls.stop();
-    }, 10000);
-
-    setTimeout(() => {
-      setProfileImageAnimation("visible");
-    }, 2000);
-  }, []);
-
-  const domainVariants = {
-    hidden: {
-      x: "10rem",
       opacity: 0,
     },
     visible: {
-      x: 0,
-      opacity: 1,
+      opacity: [0, 1, 0],
       transition: {
-        duration: 1,
-        ease: "easeIn",
-        type: "tween",
-      },
-    },
-  };
-  const aboutmeVariants = {
-    hidden: {
-      y: "-10rem",
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: "easeIn",
-        type: "tween",
-      },
-    },
-  };
-  const aboutIntroVariants = {
-    hidden: {
-      scale: 0,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: "easeIn",
-        type: "tween",
-      },
-    },
-  };
+      repeat: Infinity,
+        type: "ease",
+        duration: .8
+      }
+    }
+  }
   return (
     <div className="page about-page">
-      <motion.div
-        className="logo-about-container"
-        initial={{ scale: 0.995, rotate: -90 }}
-        animate={{ scale: [0.995, 1, 0.995] }}
-        transition={{
-          type: "linear",
-          repeat: Infinity,
-          duration: 4,
-          ease: "easeInOut",
-        }}
+      <div className="code-editor-wrap"
       >
-        <LogoAbout />
-        <LogoOutlinedAbout />
-        <div className="width-line">
-          <motion.div
-            variants={profileImageVariants}
-            initial="hidden"
-            animate={profileImageAnimation}
-            id="profile-img"
-          >
-            <img src={aboutProfileImage} alt="" style={{ rotate: "90deg" }} />
-          </motion.div>
+        <div className="code-editor">
+          {
+            aboutArray.map((line, i) => (
+              <div className={`line line-${i + 1}`} key={i}>
+                <span className="line-no">
+                  {~~((i + 1) / 10) == 0 ? `0${i + 1}` : i + 1}
+                </span>
+                <span className="line-code">
+                  {
+                    line.map(({ str, type }) => (
+                      type != "blink" ? <span className={type} style={{ color: colors.get(type), fontWeight: type === "dot" ? 400 : 700}}>{str}</span> : <motion.span variants={blinkVariants} animate="visible">{str}</motion.span>
+                    ))
+                  }
+                </span>
+              </div>
+            ))
+          }
         </div>
-      </motion.div>
-      <div className="about-textarea">
-        <br />
-        <motion.h1
-          variants={aboutmeVariants}
-          className="about-me"
-          initial="hidden"
-          animate="visible"
-        >
-          About <span>Me</span>
-        </motion.h1>
-        <motion.h3
-          className="about-domain"
-          variants={domainVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          Fullstack Web Developer!
-        </motion.h3>
-        <motion.p
-          className="about-intro"
-          variants={aboutIntroVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis
-          rnatur consequatur fuga! Distinctio dolorum sequi cum fugiat! Lorem
-          ipsum dolor sit amet, consectetur adipisicing elit. Ea neque doloribus
-          <br />
-          totam assumenda, rnatur consequatur fuga! Distinctio dolorum sequi cum
-          fugiat! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea
-          neque doloribus totam assumenda,
-          <br />
-        </motion.p>
       </div>
     </div>
   );

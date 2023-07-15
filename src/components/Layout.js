@@ -10,10 +10,10 @@ const LayoutContainer = styled.div`
   display: flex;
 `;
 
-const Layout = () => {
+const Layout = ({setCursorScale}) => {
   return (
     <LayoutContainer>
-      <Sidebar />
+      <Sidebar setCursorScale={setCursorScale} />
       <Outlet />
     </LayoutContainer>
   );

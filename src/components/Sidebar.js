@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimationControls } from "framer-motion";
 import "./Sidebar.scss";
 import LogoFilled from "../Assets/svg/LogoFilled";
 
-const Sidebar = () => {
-  const navLinkIconVariantss = {
-    hover: {
-      color: "#ffd700",
-      scale: 1.25,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
+const Sidebar = ({setCursorScale}) => {
   const navIconBounceControl = useAnimationControls();
   const socialIconBounceControl = useAnimationControls();
 
@@ -22,7 +13,7 @@ const Sidebar = () => {
 
   const navLinkIconVariants = {
     rest: {
-      x: 0,
+      scale: 1,
       transition: {
         duration: 0.2,
         type: "tween",
@@ -30,36 +21,65 @@ const Sidebar = () => {
       },
     },
     hover: {
-      opacity: 0,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeOut",
-      },
-    },
-  };
-  const navLinkTextVariants = {
-    rest: {
-      opacity: 0,
-      scale: 0,
-      ease: "easeOut",
-      duration: 0.2,
-      type: "tween",
-    },
-    hover: {
-      opacity: 1,
-      scale: 1,
+      color: "#ffd700",
+      scale: 1.25,
+      x: "1rem",
+      // cursor: "none",
       transition: {
         duration: 0.4,
         type: "spring",
-        // ease: "easeIn",
         mass: 0.5,
         stiffness: 100,
         bounce: 3,
       },
     },
   };
+  // const navLinkIconVariants = {
+  //   rest: {
+  //     x: 0,
+  //     transition: {
+  //       duration: 0.2,
+  //       type: "tween",
+  //       ease: "easeIn",
+  //     },
+  //   },
+  //   hover: {
+  //     opacity: 0,
+  //     transition: {
+  //       duration: 0.2,
+  //       type: "tween",
+  //       ease: "easeOut",
+  //     },
+  //   },
+  // };
+  const navLinkTextVariants = {
+    rest: {
+      x: 0,
+      y: 0,
+      rotate: -90,
+      opacity: 0,
+      ease: "easeOut",
+      duration: 0.1,
+      type: "tween",
+    },
+    hover: {
+      opacity: 1,
+      x: "-2rem",
+      rotate: -90,
+      transition: {
+        opacity: {
+          duration: 0.4,
+          type: "spring",
+          mass: 0.5,
+          stiffness: 100,
+          bounce: 3,
+        },
+      },
+    },
+  };
+
   useEffect(() => {
+    //for initial bounce animation of nav icons
     navIconBounceControl.set({ y: "-100vh", opacity: 0 });
     navIconBounceControl.start((i) => ({
       opacity: 1,
@@ -73,6 +93,7 @@ const Sidebar = () => {
       },
     }));
 
+    //for initial bounce animation of social link icons
     socialIconBounceControl.set({ y: "100vh", opacity: 0 });
     socialIconBounceControl.start((i) => ({
       opacity: 1,
@@ -84,6 +105,7 @@ const Sidebar = () => {
       },
     }));
 
+    //for stopping the controls after executed once
     setTimeout(() => {
       navIconBounceControl.stop();
       socialIconBounceControl.stop();
@@ -107,19 +129,22 @@ const Sidebar = () => {
     { icon: "", custom: 6, link: "#" },
     { icon: "", custom: 7, link: "#" },
   ];
+
   return (
     <div className="nav-bar">
       <div className="logo-container">
-        <LogoFilled />
+        <LogoFilled setCursorScale={setCursorScale} />
       </div>
       <ul className="nav-links">
-        {nav_links_array.map(({ icon, custom, text, link }) => (
+        {nav_links_array.map(({ icon, custom, text, link }, i) => (
           <motion.li
             initial="rest"
             whileHover="hover"
-            animate="rest"
+            // animate="rest"
             custom={custom}
             animate={navLinkAnimation}
+            onMouseEnter={() => setCursorScale(1.6)}
+            onMouseLeave={() => setCursorScale(1)}
           >
             <Link to={link}>
               <motion.span variants={navLinkTextVariants}>{text}</motion.span>
@@ -133,7 +158,9 @@ const Sidebar = () => {
       </ul>
       <ul className="social-links">
         {social_links_array.map(({ custom, icon, link }, i) => (
-          <motion.li custom={1} animate={socialIconBounceControl}>
+          <motion.li custom={custom} animate={socialIconBounceControl} 
+            onMouseEnter={() => setCursorScale(1.6)}
+            onMouseLeave={() => setCursorScale(1)}>
             {i <= 2 && (
               <motion.a
                 whileHover={{ rotate: 20, color: "#ffd700" }}
