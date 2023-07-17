@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Lumanosimo&display=swap');
+.work-page{
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    .cards-container{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 5rem;
+        .card-row{
+            height: 30rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(#000, #0000);
+            &:first-child{
+                margin-top: 0;
+            }
+            &:nth-child(even){
+                // justify-content: flex-end;
+                flex-direction: row-reverse;
+            }
+            
+            .card-wrapper{
+                height: 100%;
+                width: 45rem;
+                padding: 3rem;
+                perspective: 190px;
+                display: flex;
+                align-items: center;
+                .card-container{
+                    height: 100%;
+                    width: 100%;
+                    position: relative;
+                    transform-style: preserve-3d ;
+                    transition: 0.1s ease-out;
+                    will-change: transform;
+                    transform-origin: center;
+                    .card{
+                        position: relative;
+                        height: 100%;
+                        width: 100%;
+                        overflow: hidden;
+                        border-radius: 1rem;
+                        img{
+                            height: 100%;
+                            width: 100%;
+                        }
+                        .image-mask{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: linear-gradient(90deg, #0000, #0000, #0000, #0006, #000);
+                        }
+                    }
+
+                    .card-heading{
+                        position: absolute;
+                        bottom: 6.5rem;
+                        border-bottom: 2px solid #ffd700;
+                        padding-bottom: .4rem;
+                        transform: translateZ(8rem);
+                        font-size: 1.1rem;
+                        width: 6rem;
+                        color: #fff;
+                    }
+                }
+                
+            }
+            .card-text-container{
+                flex: 1;
+                height: 100%;
+                padding: 3% 5%;
+                color: #ffd700;
+                font-size: 1.4rem;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                letter-spacing: .1rem;
+                font-family: 'Lumanosimo', cursive;
+                
+                .card-text{
+                    transform: translate(-50%, -50%);
+                    height: 70%;
+                    width: 70%;
+                }
+            }
+        }
+    }
+}

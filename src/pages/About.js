@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "./About.scss";
 import { motion } from "framer-motion";
 
-const About = ( )  => {
+const About = ()  => {
 
   const codeEditorWrapRef = useRef()
   const aboutArray = [

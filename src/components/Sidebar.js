@@ -117,7 +117,7 @@ const Sidebar = ({setCursorScale}) => {
   const nav_links_array = [
     { icon: "fa-house", custom: 8, text: "HOME", link: "/" },
     { icon: "fa-user", custom: 6, text: "ABOUT", link: "/about" },
-    { icon: "fa-diagram-project", custom: 4, text: "WORK", link: "/work" },
+    { icon: "fa-code", custom: 4, text: "WORK", link: "/work" },
     { icon: "fa-envelope", custom: 2, text: "CONTACT", link: "/contact" },
   ];
   const social_links_array = [
@@ -151,6 +151,7 @@ const Sidebar = ({setCursorScale}) => {
               <motion.i
                 variants={navLinkIconVariants}
                 className={`fa fa-solid ${icon}`}
+                aria-hidden="true"
               ></motion.i>
             </Link>
           </motion.li>
