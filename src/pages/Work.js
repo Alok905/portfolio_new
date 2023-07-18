@@ -1,12 +1,17 @@
-import React, { createRef, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import "./Work.scss"
-import {motion, animate} from 'framer-motion'
+import { motion, animate } from 'framer-motion'
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import NetworkWifi3BarIcon from '@mui/icons-material/NetworkWifi3Bar';
 
 const Work = () => {
-  const arr = [1, 2];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [center, setCenter] = useState(null)
   const [ref, setRef] = useState(null)
   const [style, setStyle] = useState("rotate3d(0, 0, 0, 0)")
+  const [hoveringRow, setHoveringRow] = useState(null)
+  const screen = {width: window.innerWidth, height: window.innerHeight}
 
   // console.log(mouse)
   const mouseEnter = (e) => {
@@ -15,7 +20,7 @@ const Work = () => {
   
   const mouseMove = (e) => {
     const mouse = { x: e.clientX, y: e.clientY }
-    if(ref){
+    if(ref && ref.current){
       const curr = ref.current.getBoundingClientRect()
       setCenter({x: (curr.left + curr.right) / 2, y: (curr.top + curr.bottom) / 2})
     }
@@ -31,54 +36,66 @@ const Work = () => {
   }
 
   
-  const cardRowVariants = {
-    hidden: {
-      background : "#0000"
-    },
-    hover: (i) => ({
-      gradientTranform: i % 2 == 1 ?  "rotate(-90deg)" : "rotate(90deg)"
-    })
-  }
 
   const cardTextVariants = {
     hidden: (i) => {
-      // return { x: "0rem" };
-      return i % 2 == 0 ? { x: "100rem" } : { x: "-100rem" };
+      if (screen.width <= 420)
+        return { y : "-100%"}
+      if (screen.width <= 1169)
+        return { x: "-100%" };
+      return i % 2 == 0 ? { x: "30rem" } : { x: "-30rem" };
     },
-    hover: {
-      x: 0,
-      transition: {
-        duration: 0.2,
-        type: "easeIn"
+    hover: () => {
+      if (screen.width <= 420)
+        return {
+          y: 0,
+          transition: {
+            duration: 0.2,
+            type: "easeIn"
+          }
+        }
+      return {
+        x: 0,
+        transition: {
+          duration: 0.2,
+          type: "easeIn"
+        }
       }
     },
   }
-
   return <div className="page work-page">
-    <motion.div className="cards-container" initial={{gradientUnits: "#000, #0000"}}>
+    
+    <VerticalTimeline>
       {
         arr.map((values, i) => (
-          <motion.div className={`card-row card-row-${i + 1}`} key={i} whileHover="hover" initial="hidden" variants={cardRowVariants} custom={i}>
-            <div className="card-wrapper" onMouseEnter={mouseEnter} onMouseMove={mouseMove} onMouseLeave={mouseLeave} >
-              <div className="card-container" style={{ transform: style }} ref={ref}>
-                <div className="card">
-                  <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="" />
-                  <span className="image-mask" style={{
-                    background: i % 2 == 0 ? "linear-gradient(90deg, #0000, #0000, #0000, #0006, #000)" : "linear-gradient(-90deg, #0000, #0000, #0000, #0006, #000)"
-                  }}></span>
-                </div>
-                <h1 className="card-heading" style={i % 2 == 0 ? {right: "4.5rem"} : {left: "7rem"}}>The <br /> card <br /> heading</h1>
-              </div>
-            </div>
-            <motion.div className="card-text-container">
-              <motion.div className="card-text" variants={cardTextVariants} custom={i}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, optio. Blanditiis at voluptatum alias doloribus, eum repellendus consectetur ad omnis temporibus unde, cum, quos animi possimus ducimus. Rerum harum, beatae debitis ut repellendus quam modi doloribus omnis culpa ex impedit nihil ullam ab fuga obcaecati, perspiciatis odit soluta quo. Possimus.
+          <VerticalTimelineElement
+          className="vertical-timeline-element--work"
+          contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+          date="2011 - present"
+          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                  icon={<NetworkWifi3BarIcon />}
+            >
+                <motion.div className={`card-row card-row-${i + 1} ${i % 2 == 0 ? "even" : "odd"}`} key={i} whileHover="hover" initial="hidden" custom={i} onHoverStart={() => setHoveringRow(i)} onHoverEnd={() => setHoveringRow(null)}>
+                  <div className={`card-wrapper`} onMouseEnter={mouseEnter} onMouseMove={mouseMove} onMouseLeave={mouseLeave}>
+                    <div className="card-container" style={hoveringRow == i ? { transform: style }: {transform: "rotate3d(0, 0, 0, 0)"}} ref={hoveringRow == i ? ref : null} >
+                      <div className="card">
+                        <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="" />
+                        <span className={`image-mask ${i % 2 == 0 ? "even" : "odd"}`}></span>
+                      </div>
+                      <h1 className={`card-heading ${i % 2 == 0 ? "even" : "odd"}`}>The card heading</h1>
+                    </div>
+                  </div>
+                  <motion.div className={`card-text-container ${i % 2 == 0 ? "even" : "odd"} ${hoveringRow == i ? "hovering" : "nonhovering"}`}>
+                    <motion.div className={`card-text ${i % 2 == 0 ? "even" : "odd"}`} variants={cardTextVariants} custom={i}>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, optio. Blanditiis at voluptatum alias doloribus, eum repellendus consectetur ad omnis temporibus unde, cum, quos animi possimus ducimus. Rerum harum, beatae 
+                    </motion.div>
+                  </motion.div>
               </motion.div>
-            </motion.div>
-          </motion.div>
+            </VerticalTimelineElement>
         ))
       }      
-    </motion.div>
+    </VerticalTimeline>
   </div>
 };
 

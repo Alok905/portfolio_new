@@ -1,96 +1,158 @@
 @import url('https://fonts.googleapis.com/css2?family=Lumanosimo&display=swap');
+
+
 .work-page{
     overflow-y: scroll;
     &::-webkit-scrollbar{
         display: none;
     }
-    .cards-container{
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 5rem;
-        .card-row{
-            height: 30rem;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            margin-top: 1.5rem;
-            border-radius: 1rem;
-            background: linear-gradient(#000, #0000);
-            &:first-child{
-                margin-top: 0;
-            }
-            &:nth-child(even){
-                // justify-content: flex-end;
-                flex-direction: row-reverse;
-            }
-            
-            .card-wrapper{
-                height: 100%;
-                width: 45rem;
-                padding: 3rem;
-                perspective: 190px;
-                display: flex;
-                align-items: center;
-                .card-container{
-                    height: 100%;
-                    width: 100%;
-                    position: relative;
-                    transform-style: preserve-3d ;
-                    transition: 0.1s ease-out;
-                    will-change: transform;
-                    transform-origin: center;
-                    .card{
-                        position: relative;
-                        height: 100%;
-                        width: 100%;
-                        overflow: hidden;
-                        border-radius: 1rem;
-                        img{
-                            height: 100%;
-                            width: 100%;
-                        }
-                        .image-mask{
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: linear-gradient(90deg, #0000, #0000, #0000, #0006, #000);
-                        }
-                    }
+    .vertical-timeline-element--work{
+        // background: transparent;
+        .vertical-timeline-element-content{
+            -webkit-box-shadow:none;
+            box-shadow: none;
+            &.bounce-in{
+                background: transparent !important;
+                display: grid;
+                padding: 1.5em 0 !important;
 
-                    .card-heading{
-                        position: absolute;
-                        bottom: 6.5rem;
-                        border-bottom: 2px solid #ffd700;
-                        padding-bottom: .4rem;
-                        transform: translateZ(8rem);
-                        font-size: 1.1rem;
-                        width: 6rem;
-                        color: #fff;
-                    }
+                .vertical-timeline-element-content-arrow{
+                    border-right: 7px solid #abc !important;
+                    right: 99% !important;
                 }
-                
+
+                .card-row{
+                    height: 130%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    overflow: hidden;
+                    &.even{
+                        flex-direction: row-reverse;
+                    }
+                    &.odd{
+                        flex-direction: row;
+                    }
+                    
+                    .card-wrapper{
+                        max-height: 30rem;
+                        max-width: 28rem;
+                        width: 50%;
+                        height: 100%;
+                        padding: 1.35rem;
+                        background: #abc;
+                        perspective: 190px;
+                        display: flex;
+                        align-items: center;
+                        border-radius: .4rem;
+                        transition: 0.3s ease-out;
+                        z-index: 50;
+                        
+                        .card-container{
+                            height: 100%;
+                            width: 100%;
+                            position: relative;
+                            transform-style: preserve-3d ;
+                            transition: 0.1s ease-out;
+                            will-change: transform;
+                            transform-origin: center;
+                            .card{
+                                position: relative;
+                                height: 100%;
+                                width: 100%;
+                                overflow: hidden;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    z-index: 51;
+                                }
+                                .image-mask{
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: linear-gradient(#0000, #0000, #0006, #000);
+                                }
+                            }
+
+                            .card-heading{
+                                position: absolute;
+                                bottom: 6rem;
+                                font-size: .8rem;
+                                width: fit-content;
+                                color: #fff;
+                                text-align: center;
+                                left: 50%;
+                                transform: translateX(-50%) translateZ(8rem);
+                            }
+                        }
+                    }
+                    .card-text-container{
+                        flex: 1;
+                        height: 90%;
+                        color: #ffffff;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        align-items: center;
+                        overflow: hidden;
+                        letter-spacing: 0.1rem;
+                        font-family: "Lumanosimo", cursive;
+                        .card-text{
+                            background-color: #0f0f0f;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 7%;
+                            height: 100%;
+                            width: 100%;
+                            &.even{
+                                border-radius: 10% 0 0 10%;
+                            }
+                            &.odd{
+                                border-radius: 0 10% 10% 0;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1169px){
+    .card-row{
+        justify-content: flex-start !important;
+        flex-direction: row !important;
+
+        .card-wrapper{
+            // padding: 0 !important;
+        }
+        .card-text-container{
+            .card-text{
+                border-radius: 0 10% 10% 0 !important;
+            }
+        }
+    }
+}
+@media screen and (max-width: 420px){
+    .vertical-timeline-element--work{
+        margin-bottom: 20% !important;
+        .card-row{
+            justify-content: flex-start !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+
+            .card-wrapper{
+                width: 100% !important;
             }
             .card-text-container{
-                flex: 1;
-                height: 100%;
-                padding: 3% 5%;
-                color: #ffd700;
-                font-size: 1.4rem;
-                line-height: 1.5;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                letter-spacing: .1rem;
-                font-family: 'Lumanosimo', cursive;
-                
+                width: 100% !important;
+                padding: 0 !important;
                 .card-text{
-                    transform: translate(-50%, -50%);
-                    height: 70%;
-                    width: 70%;
+                    border-radius: 0 0 10% 10% !important;
                 }
             }
         }
